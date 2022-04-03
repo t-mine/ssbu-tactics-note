@@ -1,14 +1,14 @@
 import { Box, Stack } from '@chakra-ui/react';
 
 /**
- * テスト画面
+ * トップ画面
  */
-const TestPage = () => {
+const TopPage = () => {
   return (
     <Stack p="5" fontSize="sm">
-      <Box>test page</Box>
+      <Box>top page</Box>
     </Stack>
   );
 };
 
-export default TestPage;
+export default TopPage;
