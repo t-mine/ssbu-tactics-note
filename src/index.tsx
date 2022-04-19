@@ -8,22 +8,25 @@ import '@aws-amplify/ui-react/styles.css';
 import awsconfig from '../src/aws-exports';
 import { Amplify } from 'aws-amplify';
 import TopPage from './pages/TopPage';
+import { Provider } from 'jotai';
 
 Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <ChakraProvider>
-      <BrowserRouter>
-        <Stack>
-          <Header></Header>
-          <Routes>
-            <Route path="/" element={<TopPage />} />
-            <Route path="/test" element={<TestPage />} />
-          </Routes>
-        </Stack>
-      </BrowserRouter>
-    </ChakraProvider>
+    <Provider>
+      <ChakraProvider>
+        <BrowserRouter>
+          <Stack>
+            <Header></Header>
+            <Routes>
+              <Route path="/" element={<TopPage />} />
+              <Route path="/test" element={<TestPage />} />
+            </Routes>
+          </Stack>
+        </BrowserRouter>
+      </ChakraProvider>
+    </Provider>
   );
 }
 
