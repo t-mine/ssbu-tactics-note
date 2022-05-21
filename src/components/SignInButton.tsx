@@ -16,6 +16,7 @@ import {
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import React, { RefObject, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loginInfoAtom } from '../atom/atom';
 
 /**
@@ -27,12 +28,13 @@ const SignInButton: React.VFC = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [loginInfo, setLoginInfo] = useAtom(loginInfoAtom);
+  const navigate = useNavigate();
 
   const onSignInButtonClick = async () => {
     Auth.signIn(id, password)
       .then((user) => {
         setLoginInfo({ ...loginInfo, username: user.username });
-        window.location.href = '/test';
+        navigate('/test');
       })
       .catch((e) => {
         console.log('error signing in', e);
