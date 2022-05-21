@@ -14,10 +14,7 @@ const AppInit: React.VFC = () => {
         setLoginInfo({ ...loginInfo, username: user.username });
       })
       .catch(() => {
-        // サインインしていない場合はトップページに遷移する
-        if (location.pathname !== '/') {
-          window.location.href = '/';
-        }
+        setLoginInfo({ ...loginInfo, username: '' });
       });
   }, []);
 

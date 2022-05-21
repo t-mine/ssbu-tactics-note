@@ -10,6 +10,7 @@ import { Amplify } from 'aws-amplify';
 import TopPage from './pages/TopPage';
 import { Provider } from 'jotai';
 import AppInit from './components/AppInit';
+import PrivateRoute from './components/PrivateRoute';
 
 Amplify.configure(awsconfig);
 
@@ -22,7 +23,7 @@ const App: React.VFC = () => {
             <Header></Header>
             <Routes>
               <Route path="/" element={<TopPage />} />
-              <Route path="/test" element={<TestPage />} />
+              <Route path="/test" element={<PrivateRoute><TestPage /></PrivateRoute>}></Route>
             </Routes>
             <AppInit></AppInit>
           </Stack>
