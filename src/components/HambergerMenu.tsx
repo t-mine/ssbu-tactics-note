@@ -5,7 +5,7 @@ import AuthService from '../service/auth/auth-service';
 /**
  * ハンバーガーメニュー
  */
-const HambergerMenu = () => {
+const HambergerMenu: React.VFC = () => {
   return (
     <Menu>
       <MenuButton as={IconButton} aria-label="Options" icon={<HamburgerIcon />} variant="outline" />

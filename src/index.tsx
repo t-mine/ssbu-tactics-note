@@ -9,10 +9,11 @@ import awsconfig from '../src/aws-exports';
 import { Amplify } from 'aws-amplify';
 import TopPage from './pages/TopPage';
 import { Provider } from 'jotai';
+import AppInit from './pages/AppInit';
 
 Amplify.configure(awsconfig);
 
-function App() {
+const App: React.VFC = () => {
   return (
     <Provider>
       <ChakraProvider>
@@ -23,11 +24,12 @@ function App() {
               <Route path="/" element={<TopPage />} />
               <Route path="/test" element={<TestPage />} />
             </Routes>
+            <AppInit></AppInit>
           </Stack>
         </BrowserRouter>
       </ChakraProvider>
     </Provider>
   );
-}
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));

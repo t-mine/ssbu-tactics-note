@@ -21,7 +21,7 @@ import { loginInfoAtom } from '../atom/atom';
 /**
  * サインインボタン
  */
-const SignInButton = () => {
+const SignInButton: React.VFC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef: RefObject<any> = React.useRef();
   const [id, setId] = useState('');
@@ -29,13 +29,14 @@ const SignInButton = () => {
   const [loginInfo, setLoginInfo] = useAtom(loginInfoAtom);
 
   const onSignInButtonClick = async () => {
-    try {
-      const user = await Auth.signIn(id, password);
-      setLoginInfo({ ...loginInfo, username: user.username });
-      onClose();
-    } catch (error) {
-      console.log('error signing in', error);
-    }
+    Auth.signIn(id, password)
+      .then((user) => {
+        setLoginInfo({ ...loginInfo, username: user.username });
+        window.location.href = '/test';
+      })
+      .catch((e) => {
+        console.log('error signing in', e);
+      });
   };
 
   return (

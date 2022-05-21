@@ -7,7 +7,7 @@ import SignInButton from './SignInButton';
 /**
  * ヘッダー
  */
-export default function Header() {
+const Header: React.VFC = () => {
   const [loginInfo] = useAtom(loginInfoAtom);
 
   const renderRightTop = () => {
@@ -26,4 +26,6 @@ export default function Header() {
       {renderRightTop()}
     </HStack>
   );
-}
+};
+
+export default Header;
