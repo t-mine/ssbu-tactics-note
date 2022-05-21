@@ -14,7 +14,9 @@ const AppInit: React.VFC = () => {
         setLoginInfo({ ...loginInfo, username: user.username });
       })
       .catch(() => {
-        window.location.href = '/';
+        if (location.pathname !== '/') {
+          window.location.href = '/';
+        }
       });
   }, []);
 

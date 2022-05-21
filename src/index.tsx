@@ -9,7 +9,7 @@ import awsconfig from '../src/aws-exports';
 import { Amplify } from 'aws-amplify';
 import TopPage from './pages/TopPage';
 import { Provider } from 'jotai';
-import AppInit from './pages/AppInit';
+import AppInit from './components/AppInit';
 
 Amplify.configure(awsconfig);
 
