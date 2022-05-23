@@ -1,17 +1,15 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
   FormControl,
   FormLabel,
   Input,
-  useDisclosure,
-  Link,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
@@ -20,10 +18,9 @@ import { useNavigate } from 'react-router-dom';
 import { loginInfoAtom } from '../atom/atom';
 
 /**
- * サインインボタン
+ * サインインモーダル
  */
-const SignInButton: React.VFC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props) => {
   const initialRef: RefObject<any> = React.useRef();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +31,7 @@ const SignInButton: React.VFC = () => {
     Auth.signIn(id, password)
       .then((user) => {
         setLoginInfo({ ...loginInfo, username: user.username });
+        props.onClose();
         navigate('/test');
       })
       .catch((e) => {
@@ -43,9 +41,7 @@ const SignInButton: React.VFC = () => {
 
   return (
     <>
-      <Link onClick={onOpen}>ログイン</Link>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>
@@ -71,4 +67,4 @@ const SignInButton: React.VFC = () => {
   );
 };
 
-export default SignInButton;
+export default SignInModal;

@@ -1,20 +1,23 @@
-import { Text, HStack } from '@chakra-ui/react';
+import { Text, HStack, useDisclosure } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
 import { loginInfoAtom } from '../atom/atom';
 import HambergerMenu from './HambergerMenu';
-import SignInButton from './SignInButton';
+import SignInLink from './SignInLink';
+import SignInModal from './SignInModal';
 
 /**
  * ヘッダー
  */
 const Header: React.VFC = () => {
   const [loginInfo] = useAtom(loginInfoAtom);
+  // サインインモーダルのフック
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const renderRightTop = () => {
     if (loginInfo.username) {
       return <HambergerMenu></HambergerMenu>;
     } else {
-      return <SignInButton></SignInButton>;
+      return <SignInLink onOpen={onOpen}></SignInLink>;
     }
   };
 
@@ -24,6 +27,7 @@ const Header: React.VFC = () => {
         Smash Note
       </Text>
       {renderRightTop()}
+      <SignInModal isOpen={isOpen} onClose={onClose}></SignInModal>
     </HStack>
   );
 };
