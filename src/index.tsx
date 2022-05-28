@@ -11,6 +11,7 @@ import TopPage from './pages/TopPage';
 import { Provider } from 'jotai';
 import AppInit from './components/AppInit';
 import PrivateRoute from './components/PrivateRoute';
+import NotFound from './pages/NotFound';
 
 Amplify.configure(awsconfig);
 
@@ -22,7 +23,10 @@ const App: React.VFC = () => {
           <Stack>
             <Header></Header>
             <Routes>
+              {/* 認証なし */}
               <Route path="/" element={<TopPage />} />
+              <Route path='*' element={<NotFound />} />
+              {/* 認証あり */}
               <Route path="/test" element={<PrivateRoute><TestPage /></PrivateRoute>}></Route>
             </Routes>
             <AppInit></AppInit>
