@@ -6,8 +6,8 @@ import { loginInfoAtom } from '../atom/atom';
 
 export const useSignIn = () => {
   const [loginInfo, setLoginInfo] = useAtom(loginInfoAtom);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isSignInLoading, setIsLoading] = useState(false);
+  const [isSignInError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   const onClickSignInButton = (id: string, password: string, onClose: () => void) => {
@@ -26,5 +26,5 @@ export const useSignIn = () => {
       });
   };
 
-  return { isLoading, isError, onClickSignInButton };
+  return { isSignInLoading, isSignInError, onClickSignInButton };
 };
