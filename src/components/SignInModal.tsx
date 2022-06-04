@@ -20,6 +20,7 @@ import React, { RefObject, useState } from 'react';
 import { useSignIn } from '../hooks/useSignIn';
 import Loading from '../components/Loading';
 import { useSignUp } from '../hooks/useSignUp';
+import VerificationModal from './VerificationModal';
 
 /**
  * サインインモーダル
@@ -29,8 +30,9 @@ const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props)
   // サインイン
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { isSignInLoading, isSignInError, onClickSignInButton } = useSignIn();
+  const { isSignInLoading, isSignInError, signIn } = useSignIn();
   // サインアップ
+  const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpId, setSignUpId] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const { isSignUpLoading, isSignUpError, onClickSignUpButton } = useSignUp();
@@ -64,7 +66,7 @@ const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props)
                   </FormControl>
                 </ModalBody>
                 <ModalFooter>
-                  <Button onClick={() => onClickSignInButton(id, password, props.onClose)} colorScheme="blue" mr={3}>
+                  <Button onClick={() => signIn(id, password, props.onClose)} colorScheme="blue" mr={3}>
                     ログイン
                   </Button>
                 </ModalFooter>
@@ -72,6 +74,10 @@ const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props)
               {/* サインアップ */}
               <TabPanel>
                 <ModalBody pb={6}>
+                  <FormControl>
+                    <FormLabel>Eメールアドレス</FormLabel>
+                    <Input ref={initialRef} placeholder="Eメールアドレス" onChange={(e) => setSignUpEmail(e.target.value)} />
+                  </FormControl>
                   <FormControl>
                     <FormLabel>ID</FormLabel>
                     <Input ref={initialRef} placeholder="ID" onChange={(e) => setSignUpId(e.target.value)} />
@@ -82,7 +88,7 @@ const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props)
                   </FormControl>
                 </ModalBody>
                 <ModalFooter>
-                  <Button onClick={() => onClickSignUpButton(signUpId, signUpPassword, props.onClose)} colorScheme="blue" mr={3}>
+                  <Button onClick={() => onClickSignUpButton(signUpEmail, signUpId, signUpPassword, props.onClose)} colorScheme="blue" mr={3}>
                     アカウント作成
                   </Button>
                 </ModalFooter>
@@ -91,6 +97,7 @@ const SignInModal: React.VFC<{ isOpen: boolean; onClose: () => void }> = (props)
           </Tabs>
         </ModalContent>
       </Modal>
+      <VerificationModal></VerificationModal>
     </>
   );
 };

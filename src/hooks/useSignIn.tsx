@@ -6,25 +6,26 @@ import { loginInfoAtom } from '../atom/atom';
 
 export const useSignIn = () => {
   const [loginInfo, setLoginInfo] = useAtom(loginInfoAtom);
+  // sign in
   const [isSignInLoading, setIsLoading] = useState(false);
   const [isSignInError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  const onClickSignInButton = (id: string, password: string, onClose: () => void) => {
-    onClose();
+  const signIn = async (id: string, password: string, onClose: (() => void) | null) => {
+    if (onClose !== null) onClose();
     setIsLoading(true);
     setIsError(false);
-    Auth.signIn(id, password)
-      .then((user) => {
-        setIsLoading(false);
-        setLoginInfo({ ...loginInfo, username: user.username });
-        navigate('/test');
-      })
-      .catch((e) => {
-        console.log('error signing in', e);
-        setIsError(true);
-      });
+
+    try {
+      const user = await Auth.signIn(id, password);
+      setIsLoading(false);
+      setLoginInfo({ ...loginInfo, username: user.username });
+      navigate('/test');
+    } catch (e) {
+      console.log('error signing in', e);
+      setIsError(true);
+    }
   };
 
-  return { isSignInLoading, isSignInError, onClickSignInButton };
+  return { isSignInLoading, isSignInError, signIn };
 };
