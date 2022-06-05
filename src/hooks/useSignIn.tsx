@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginInfoAtom } from '../atom/atom';
+import { loginInfoAtom, signInUpModalAtom } from '../atom/atom';
 
 export const useSignIn = () => {
   const [loginInfo, setLoginInfo] = useAtom(loginInfoAtom);
@@ -10,9 +10,10 @@ export const useSignIn = () => {
   const [isSignInLoading, setIsLoading] = useState(false);
   const [isSignInError, setIsError] = useState(false);
   const navigate = useNavigate();
+  // サインイン＆サインアップモーダル
+  const [signInUpModal] = useAtom(signInUpModalAtom);
 
-  const signIn = async (id: string, password: string, onClose: (() => void) | null) => {
-    if (onClose !== null) onClose();
+  const signIn = async (id: string, password: string) => {
     setIsLoading(true);
     setIsError(false);
 
@@ -21,6 +22,8 @@ export const useSignIn = () => {
       setIsLoading(false);
       setLoginInfo({ ...loginInfo, username: user.username });
       navigate('/test');
+      // TODO これいる？
+      signInUpModal.onClose();
     } catch (e) {
       console.log('error signing in', e);
       setIsError(true);

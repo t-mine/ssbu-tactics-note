@@ -10,8 +10,7 @@ export const useSignUp = () => {
   const [isSignUpLoading, setIsLoading] = useState(false);
   const [isSignUpError, setIsError] = useState(false);
 
-  const onClickSignUpButton = (email: string, id: string, password: string, onClose: () => void) => {
-    onClose();
+  const onClickSignUpButton = (email: string, id: string, password: string) => {
     setIsLoading(true);
     setIsError(false);
     // サインアップ処理

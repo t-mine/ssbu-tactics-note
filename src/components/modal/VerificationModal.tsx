@@ -15,9 +15,9 @@ import {
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import React, { RefObject, useEffect, useState } from 'react';
-import { verificationModalAtom } from '../atom/atom';
-import { useSignIn } from '../hooks/useSignIn';
-import Loading from './Loading';
+import { verificationModalAtom } from '../../atom/atom';
+import { useSignIn } from '../../hooks/useSignIn';
+import Loading from '../Loading';
 
 /**
  * 確認コード入力モーダル
@@ -25,7 +25,7 @@ import Loading from './Loading';
 const VerificationModal: React.VFC = () => {
   // atom
   const [verificationModal, setVerificationModal] = useAtom(verificationModalAtom);
-  // props
+  // サインアップ時に入力したIDとパスワード TODO
   const id = verificationModal.fields.id;
   const password = verificationModal.fields.password;
   // 確認コード入力モーダル
@@ -33,17 +33,17 @@ const VerificationModal: React.VFC = () => {
   const initialRef: RefObject<any> = React.useRef();
   const [verificationCode, setVerificationCode] = useState('');
   // サインイン
-  const { isSignInLoading, isSignInError, signIn } = useSignIn();
+  const { isSignInLoading, signIn } = useSignIn();
 
   useEffect(() => {
-    setVerificationModal({ ...verificationModal, onOpen: onOpen, onClose: onClose });
+    setVerificationModal({ ...verificationModal, onOpen: onOpen });
   }, []);
 
   const onSubmitBtnClick = async () => {
     try {
       await Auth.confirmSignUp(id, verificationCode);
-      verificationModal.onClose();
-      await signIn(id, password, null);
+      onClose(); // TODO イランと思う。
+      await signIn(id, password);
     } catch (e) {
       console.log(e);
     }
@@ -52,7 +52,6 @@ const VerificationModal: React.VFC = () => {
   return (
     <>
       {isSignInLoading ? <Loading></Loading> : ''}
-      {isSignInError ? 'ログインエラー' : ''}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -1,6 +1,6 @@
 import { EditIcon, ExternalLinkIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { IconButton, MenuButton, Menu, MenuItem, MenuList } from '@chakra-ui/react';
-import AuthService from '../service/auth/auth-service';
+import AuthService from '../../service/auth/auth-service';
 
 /**
  * ハンバーガーメニュー

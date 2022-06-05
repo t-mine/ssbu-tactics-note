@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ChakraProvider, Stack } from '@chakra-ui/react';
 import TestPage from './pages/TestPage';
-import Header from './components/Header';
+import Header from './components/header/Header';
 
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from '../src/aws-exports';

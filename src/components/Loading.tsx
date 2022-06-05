@@ -17,7 +17,7 @@ const Loading: React.VFC = () => {
   };
 
   return (
-    <Box style={style} position="fixed">
+    <Box style={style} position="fixed" zIndex={10}>
       <Box mx="auto">Loading...</Box>
     </Box>
   );
