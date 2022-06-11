@@ -6,7 +6,9 @@ export const loginInfoAtom = atomWithStorage('loginInfo', { username: '' });
 
 // サインイン&サインアップモーダル
 export const signInUpModalAtom = atom({
+  // Header内のサインインリンクでサインインモーダルを開くために使用する
   onOpen: () => {},
+  // サインイン成功後にサインインモーダルを閉じるために使用する
   onClose: () => {},
 });
 
@@ -19,6 +21,6 @@ export const verificationModalAtom = atom({
     email: '',
     password: '',
   },
+  // サインアップ成功時に確認コード入力モーダルを表示するために使用する
   onOpen: () => {},
-  onClose: () => {},
 });
