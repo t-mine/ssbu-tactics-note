@@ -1,7 +1,7 @@
 import { Text, HStack } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
 import { loginInfoAtom, signInUpModalAtom } from '../../atom/atom';
-import SignInModal from '../modal/SignInUpModal';
+import SignInUpModal from '../modal/SignInUpModal';
 import HambergerMenu from './HambergerMenu';
 import SignInLink from './SignInLink';
 
@@ -26,7 +26,7 @@ const Header: React.VFC = () => {
         Smash Note
       </Text>
       {renderRightTop()}
-      <SignInModal></SignInModal>
+      <SignInUpModal></SignInUpModal>
     </HStack>
   );
 };

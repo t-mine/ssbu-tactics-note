@@ -21,7 +21,7 @@ import SignUpForm from './SignUpForm';
 /**
  * サインイン＆サインアップモーダル（ヘッダーから読み込まれる）
  */
-const SignInModal: React.VFC = () => {
+const SignInUpModal: React.VFC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // 他のコンポーネントから操作しやすいようにグローバル変数に格納する
@@ -63,4 +63,4 @@ const SignInModal: React.VFC = () => {
   );
 };
 
-export default SignInModal;
+export default SignInUpModal;
